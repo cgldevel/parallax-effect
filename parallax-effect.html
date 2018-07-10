@@ -1,5 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 
+
+<!-- Jarallax Github: https://github.com/nk-o/jarallax#b-javascript-way -->
+
 <!-- Jarallax -->
 <script src="../jarallax/dist/jarallax.min.js"></script>
 <!-- Include it if you want to use Video parallax -->
@@ -17,7 +20,6 @@
     <style>
       :host {
         display: block;
-        --parallax-image-background: '';
       }
 
       .jarallax {
@@ -38,11 +40,36 @@
         height: 100%;
         z-index: -1;
       }
+
+      #title_contain {
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: center;
+        padding-top: 170px;
+      }
+
+      .title {
+        background: rgba(0, 0, 0, 0.3);
+        display: block;
+        padding: 20px 15px;
+        text-align: center;
+        width: 40%;
+        color: #fff;
+        font-size: 2em;
+        position: absolute;
+        border: solid 1px;
+      }
     </style>
 
-    <!-- Background image / video Parallax -->
-    <div class="jarallax"></div>
-
+    <div class="parallax_contain">
+      <div class="jarallax">
+        <template is="dom-if" if="[[title]]">
+          <div id="title_contain">
+            <div class="title">[[title]]</div>
+          </div>
+        </template>
+      </div>
+    </div>
 
   </template>
 
@@ -52,27 +79,35 @@
       is: 'parallax-effect',
 
       properties: {
-      /**
-        * Types of parallax (image / video)
-        */
+        /**
+          * Types of parallax (image / video)
+          */
         type: {
           type: String,
           value: 'image',
           reflectToAttribute: true,
         },
-      /**
-        * Source of (image / video)
-        */
+        /**
+          * Source of (image / video)
+          */
         src: {
           type: String,
           value: '',
           reflectToAttribute: true,
         },
 
-      /**
-        * Alt text
-        */
+        /**
+          * Alt text for image
+          */
         alt: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+        /**
+          * Title for parallax panel
+          */
+        title: {
           type: String,
           value: '',
           reflectToAttribute: true,
@@ -83,32 +118,29 @@
         const targets = this.querySelectorAll('.jarallax')
         // console.log(targets);
         const options = {
-          speed: .2
+          speed: .2,
+          videoStartTime: 06,
+          videoEndTime: 23,
+          // disableParallax: /iPad|iPhone|iPod|Android/,
         }
 
         switch (this.type) {
-          case 'image': 
+          case 'image':
             options.imgSrc = this.src;
             break;
 
-          case 'video': 
+          case 'video':
             options.videoSrc = this.src;
             break;
-        
+
           default:
             options.imgSrc = this.src;
             break;
         }
-       
+
         jarallax(targets, options);
       },
 
-
-
-
     });
-
-
-
   </script>
 </dom-module>
