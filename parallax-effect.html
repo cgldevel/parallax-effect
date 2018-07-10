@@ -1,0 +1,114 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!-- Jarallax -->
+<script src="../jarallax/dist/jarallax.min.js"></script>
+<!-- Include it if you want to use Video parallax -->
+<script src="../jarallax/dist/jarallax-video.min.js"></script>
+<!-- Include it if you want to parallax any element -->
+<script src="../jarallax/dist/jarallax-element.min.js"></script>
+
+<!--
+`parallax-effect`
+@demo demo/index.html
+-->
+
+<dom-module id="parallax-effect">
+  <template>
+    <style>
+      :host {
+        display: block;
+        --parallax-image-background: '';
+      }
+
+      .jarallax {
+        position: relative;
+        z-index: 0;
+        height: 400px;
+        overflow: hidden;
+      }
+
+      .jarallax>.jarallax-img {
+        position: absolute;
+        object-fit: cover;
+        /* support for plugin https://github.com/bfred-it/object-fit-images */
+        font-family: 'object-fit: cover;';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+    </style>
+
+    <!-- Background image / video Parallax -->
+    <div class="jarallax"></div>
+
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'parallax-effect',
+
+      properties: {
+      /**
+        * Types of parallax (image / video)
+        */
+        type: {
+          type: String,
+          value: 'image',
+          reflectToAttribute: true,
+        },
+      /**
+        * Source of (image / video)
+        */
+        src: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+
+      /**
+        * Alt text
+        */
+        alt: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+      },
+
+      attached: function () {
+        const targets = this.querySelectorAll('.jarallax')
+        // console.log(targets);
+        const options = {
+          speed: .2
+        }
+
+        switch (this.type) {
+          case 'image': 
+            options.imgSrc = this.src;
+            break;
+
+          case 'video': 
+            options.videoSrc = this.src;
+            break;
+        
+          default:
+            options.imgSrc = this.src;
+            break;
+        }
+       
+        jarallax(targets, options);
+      },
+
+
+
+
+    });
+
+
+
+  </script>
+</dom-module>
