@@ -61,15 +61,17 @@
       }
     </style>
 
-    <div class="parallax_contain">
-      <div class="jarallax">
-        <template is="dom-if" if="[[title]]">
-          <div id="title_contain">
-            <div class="title">[[title]]</div>
-          </div>
-        </template>
+    <a href="[[url]]" target$="[[_urlTarget(url)]]">
+      <div class="parallax_contain">
+        <div class="jarallax">
+          <template is="dom-if" if="[[title]]">
+            <div id="title_contain">
+              <div class="title">[[title]]</div>
+            </div>
+          </template>
+        </div>
       </div>
-    </div>
+    </a>
 
   </template>
 
@@ -112,6 +114,14 @@
           value: '',
           reflectToAttribute: true,
         },
+        /**
+          * Url for parallax panel
+          */
+        url: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
       },
 
       attached: function () {
@@ -141,6 +151,25 @@
         jarallax(targets, options);
       },
 
+      /**
+       * Internal function to check if a url is external
+       */
+      _outsideLink: function (url) {
+        if (url.indexOf('http') != 0) return false;
+        var loc = location.href, path = location.pathname,
+          root = loc.substring(0, loc.indexOf(path));
+        return url.indexOf(root) != 0;
+      },
+
+      _urlTarget: function (url) {
+        if (url) {
+          const external = this._outsideLink(url);
+          if (external) {
+            return "_blank";
+          }
+        }
+        return false;
+      },
     });
   </script>
 </dom-module>
