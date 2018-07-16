@@ -1,0 +1,24 @@
+{
+  "name": "parallax-effect",
+  "main": "parallax-effect.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^6.0.0-prerelease.5",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "homepage": "https://github.com/cgldevel/parallax-effect",
+  "_release": "d423a80226",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d423a80226c5df451d90ed6a7481610dcb525c1e"
+  },
+  "_source": "https://github.com/cgldevel/parallax-effect.git",
+  "_target": "master",
+  "_originalSource": "cgldevel/parallax-effect",
+  "_direct": true
+}
